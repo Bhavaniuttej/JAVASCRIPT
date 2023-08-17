@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            width: 1100px;
+            height: 500px;
+            /* background-color: aqua; */
+            margin-top: 20px;
+            margin-left: 400px;
+        }
+        .child1{
+            width: 350px;
+            height: 350px;
+            background-color: bisque;
+            float: left;
+        }
+        .td1
+        {
+            font-size: 20px;
+        }
+        .i{
+            width: 320px;
+        }
+        .a{
+            height: 30px;
+        }
+        button{
+            width: 150px;
+            height: 50px;
+            background-color: blue;
+            color: white;
+            position: relative;
+            top: 90px;
+            left: 60px;
+        }
+        #abc{
+            position: relative;
+            top: -60px;
+            left: 80px;
+            color: brown;
+        }
+        mark{
+            color:red;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <div class="child1">
+            <table>
+                <tr>
+                    <td class="td1">Amount you need &nbsp;&nbsp;&nbsp;<input type="text" placeholder="&#8377" size="20" class="a" id="bunny"></td>
+                </tr>
+                <tr>
+                    <td ><input type="range" class="i" id="bunny1" min="50000" max="4000000" onchange="displayAmount()"></td>
+                </tr>
+                <tr>
+                    <td class="td1">&#8377;50000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4000000</td>
+                </tr>
+            </table>
+        </div>
+        <div class="child1">
+            <table>
+                <tr>
+                    <td class="td1"> For &nbsp;&nbsp;&nbsp;<input type="text" size="4" class="a" id="year">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Years</td>
+                </tr>
+                <tr>
+                    <td ><input type="range" class="i" id="yearrange"
+                        min="1" max="5" onchange="displayYear()"></td>
+                </tr>
+                <tr>
+                    <td class="td1">1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5</td>
+                </tr>
+            </table>
+        </div>
+        <div class="child1">
+            <table>
+                <tr>
+                    <td class="td1">Intrest rate&nbsp;&nbsp;&nbsp;<input type="text" size="4" class="a" id="rate">&nbsp;&nbsp;&nbsp;&nbsp;%</td>
+                </tr>
+                <tr>
+                    <td ><input type="range" class="i"
+                        id="raterange" min="10.5" max="21"
+                        onchange="displayRate()"></td>
+                </tr>
+                <tr>
+                    <td class="td1">10.5% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21%</td>
+                </tr>
+            </table>
+            <button onclick="calcuate()" >CALCULATE</button>
+        </div>
+        <h1 id="abc"></h1>
+    </div>
+    <script>
+        function displayAmount()
+        {
+            document.getElementById("bunny").value=document.getElementById("bunny1").value;
+        }
+        function displayYear()
+        {
+            document.getElementById("year").value=document.getElementById("yearrange").value;
+        }
+        function displayRate()
+        {
+            document.getElementById("rate").value=document.getElementById("raterange").value;
+        }
+        function calcuate()
+        {
+            // EMI=[P*R*Math.pow((1+r),N)]/[Math.pow((1+R),N)-1]
+            let P=Number(document.getElementById("bunny").value);
+            let N=Number(document.getElementById("year").value)*12;
+            let R=Number(document.getElementById("rate").value)/12/100;
+            EMI=[P*R*Math.pow((1+R),N)]/[Math.pow((1+R),N)-1]
+            console.log(EMI);
+            document.getElementById("abc").innerHTML=`YOUR MONTHLY EMI WILL BE <mark> &#8377;${Math.floor(EMI)} </mark>PER MONTH`
+
+
+
+
+        }
+        
+    </script>
+</body>
+</html>
